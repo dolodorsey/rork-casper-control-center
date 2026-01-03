@@ -5,9 +5,9 @@ import { supabase } from '@/lib/supabase';
 
 export default function AuthCallback() {
   useEffect(() => {
-    Linking.addEventListener('url', async (event) => {
+    const subscription = Linking.addEventListener('url', async (event) => {
       const url = event.url;
-      const { data, error } = await supabase.auth.getSessionFromUrl({ url });
+      const { data, error } = await supabase.auth.exchangeCodeForSession(url);
       if (error) {
         console.error('Auth callback error:', error);
       }
@@ -15,6 +15,10 @@ export default function AuthCallback() {
         router.replace('/');
       }
     });
+    
+    return () => {
+      subscription.remove();
+    };
   }, []);
 
   return null;

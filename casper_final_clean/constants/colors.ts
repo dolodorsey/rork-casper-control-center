@@ -11,12 +11,18 @@ export const COLORS = {
   // Base Colors
   deepBlack: '#000000',
   darkCharcoal: '#1A1A1A',
+  midnightBlack: '#0A0A0A',
   pureWhite: '#FFFFFF',
+  white: '#FFFFFF',
   
   // UI Colors
   borderGray: 'rgba(255, 255, 255, 0.1)',
   lightGray: '#9CA3AF',
+  mutedGray: '#6B7280',
   alertRed: '#EF4444',
+  background: '#000000',
+  surface: '#1A1A1A',
+  textSecondary: '#9CA3AF',
   
   // Gradients
   goldGradient: ['#FFD700', '#B8860B'],

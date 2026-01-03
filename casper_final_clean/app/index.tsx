@@ -236,5 +236,175 @@ export default function LandingScreen() {
                 </View>
               </LinearGradient>
             </View>
+          </Animated.View>
+        </Animated.ScrollView>
+      </SafeAreaView>
+    </View>
+  );
+}
 
-;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: COLORS.deepBlack,
+  },
+  veinContainer: {
+    ...StyleSheet.absoluteFillObject,
+    overflow: 'hidden',
+  },
+  vein: {
+    position: 'absolute',
+    width: width * 2,
+    height: height * 2,
+    borderRadius: width,
+    borderWidth: 1,
+    borderColor: COLORS.moltenGold,
+    top: -height,
+    left: -width / 2,
+  },
+  safeArea: {
+    flex: 1,
+  },
+  content: {
+    paddingBottom: 40,
+  },
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 20,
+    paddingTop: 20,
+    paddingBottom: 24,
+  },
+  logoContainer: {
+    width: 56,
+    height: 56,
+    borderRadius: 28,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 16,
+  },
+  logoText: {
+    fontSize: 32,
+    fontWeight: '900',
+    color: COLORS.deepBlack,
+  },
+  headerText: {
+    flex: 1,
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: '900',
+    color: COLORS.white,
+    letterSpacing: 2,
+  },
+  subtitle: {
+    fontSize: 11,
+    fontWeight: '600',
+    color: COLORS.mutedGray,
+    letterSpacing: 1.5,
+    marginTop: 2,
+  },
+  metricsContainer: {
+    marginBottom: 24,
+  },
+  portalSection: {
+    paddingHorizontal: 20,
+    marginBottom: 32,
+  },
+  sectionTitle: {
+    fontSize: 13,
+    fontWeight: '800',
+    color: COLORS.moltenGold,
+    letterSpacing: 2,
+    marginBottom: 16,
+  },
+  portalGrid: {
+    gap: 12,
+  },
+  snapshotSection: {
+    paddingHorizontal: 20,
+    marginBottom: 32,
+  },
+  snapshotGrid: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 12,
+  },
+  snapshotCard: {
+    flex: 1,
+    minWidth: (width - 52) / 2,
+    backgroundColor: COLORS.darkCharcoal,
+    borderRadius: 12,
+    padding: 16,
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: 'rgba(255, 255, 255, 0.05)',
+  },
+  snapshotValue: {
+    fontSize: 28,
+    fontWeight: '900',
+    color: COLORS.white,
+    marginTop: 8,
+  },
+  snapshotLabel: {
+    fontSize: 11,
+    fontWeight: '600',
+    color: COLORS.mutedGray,
+    marginTop: 4,
+    textAlign: 'center',
+  },
+  brandSection: {
+    marginBottom: 32,
+  },
+  brandScroll: {
+    paddingHorizontal: 20,
+    gap: 16,
+  },
+  mapSection: {
+    paddingHorizontal: 20,
+    marginBottom: 32,
+  },
+  flagshipSection: {
+    paddingHorizontal: 20,
+    marginBottom: 32,
+  },
+  flagshipCard: {
+    borderRadius: 16,
+    padding: 24,
+    borderWidth: 1,
+    borderColor: COLORS.moltenGold,
+  },
+  flagshipTitle: {
+    fontSize: 20,
+    fontWeight: '900',
+    color: COLORS.moltenGold,
+    letterSpacing: 1.5,
+    marginBottom: 8,
+  },
+  flagshipSubtitle: {
+    fontSize: 14,
+    fontWeight: '400',
+    color: COLORS.mutedGray,
+    lineHeight: 20,
+    marginBottom: 20,
+  },
+  flagshipStats: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+  },
+  flagshipStat: {
+    alignItems: 'center',
+  },
+  flagshipStatValue: {
+    fontSize: 24,
+    fontWeight: '900',
+    color: COLORS.white,
+  },
+  flagshipStatLabel: {
+    fontSize: 10,
+    fontWeight: '700',
+    color: COLORS.mutedGray,
+    marginTop: 4,
+    letterSpacing: 1,
+  },
+});

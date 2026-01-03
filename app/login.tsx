@@ -1,13 +1,13 @@
 import { View, Button } from 'react-native';
 import * as WebBrowser from 'expo-web-browser';
-import { makeRedirectUri } from 'expo-auth-session';
+import * as Linking from 'expo-linking';
 import { supabase } from '@/lib/supabase';
 
 WebBrowser.maybeCompleteAuthSession();
 
 export default function LoginScreen() {
   async function handleLogin() {
-    const redirectTo = makeRedirectUri({ scheme: 'caspercontrol' });
+    const redirectTo = Linking.createURL('/auth/callback');
     const { error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
