@@ -142,7 +142,7 @@ export default function NeedsTab({
       {needs.length === 0 ? (
         <View style={styles.emptyCard}>
           <Text style={styles.emptyTitle}>No requests yet.</Text>
-          <Text style={styles.muted}>Once your team submits requests, they’ll appear here in real time.</Text>
+          <Text style={styles.muted}>Once your team submits requests, they'll appear here in real time.</Text>
         </View>
       ) : (
         needs.map((n) => (

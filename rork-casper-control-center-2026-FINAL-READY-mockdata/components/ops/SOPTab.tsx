@@ -33,7 +33,6 @@ export default function SOPTab({
   const docsQuery = useQuery({
     queryKey: ['ops', 'sops', mode],
     queryFn: async () => {
-      // RLS controls which docs each role can see.
       const { data, error } = await supabase
         .from('sop_documents')
         .select('*')

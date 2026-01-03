@@ -51,12 +51,12 @@ function mapAlert(row: any): Alert {
     type: row.type ?? row.severity ?? "info",
     title: row.title ?? "Alert",
     message: row.message ?? "",
-    timestamp: row.created_at ? new Date(row.created_at).toLocaleString() : "",
-    location: row.location_name ?? row.location_id ?? "All Locations",
-    priority: row.priority ?? row.severity ?? "medium",
+    createdAt: row.created_at ?? new Date().toISOString(),
+    severity: row.severity ?? "medium",
     status: row.acknowledged ? "acknowledged" : "active",
-    category: row.category ?? "general",
-    playbookId: row.playbook_id ?? "default",
+    actionable: row.actionable ?? false,
+    targetId: row.target_id ?? row.id,
+    targetType: row.target_type ?? "location",
   };
 }
 

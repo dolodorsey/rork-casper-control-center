@@ -26,7 +26,7 @@ export function PillButton({
     kind === 'primary'
       ? COLORS.moltenGold
       : kind === 'danger'
-      ? COLORS.crimson
+      ? COLORS.alertRed
       : kind === 'success'
       ? COLORS.electricBlue
       : COLORS.glass;

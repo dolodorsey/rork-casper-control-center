@@ -32,6 +32,7 @@ export const COLORS = {
   card: '#1A1A1A',
   border: 'rgba(255, 255, 255, 0.1)',
   midnightBlack: '#0A0A0A',
+  deepCharcoal: '#1A1A1A',
   
   // Gradients
   goldGradient: ['#FFD700', '#B8860B'],
