@@ -37,6 +37,8 @@ export default function LandingScreen() {
   const router = useRouter();
   const { hasSeenIntro, setHasSeenIntro } = useCasper();
   const [introComplete, setIntroComplete] = useState(hasSeenIntro);
+  
+  console.log('[LandingScreen] Render - hasSeenIntro:', hasSeenIntro, 'introComplete:', introComplete);
   const fadeAnim = useRef(new Animated.Value(hasSeenIntro ? 1 : 0)).current;
   const scaleAnim = useRef(new Animated.Value(hasSeenIntro ? 1 : 0.95)).current;
   const scrollY = useRef(new Animated.Value(0)).current;
@@ -61,6 +63,7 @@ export default function LandingScreen() {
   }, [introComplete, hasSeenIntro, fadeAnim, scaleAnim, setHasSeenIntro]);
 
   const handleIntroComplete = useCallback(() => {
+    console.log('[LandingScreen] Intro complete');
     setIntroComplete(true);
   }, []);
 
@@ -69,8 +72,11 @@ export default function LandingScreen() {
   }, [router]);
 
   if (!introComplete) {
+    console.log('[LandingScreen] Showing intro');
     return <CinematicIntro onComplete={handleIntroComplete} />;
   }
+  
+  console.log('[LandingScreen] Showing main content');
 
   return (
     <View style={styles.container}>

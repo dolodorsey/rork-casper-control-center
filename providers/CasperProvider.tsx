@@ -14,8 +14,10 @@ export const [CasperProvider, useCasper] = createContextHook<CasperContextType>(
   const [selectedPortal, setSelectedPortal] = useState<string | null>(null);
 
   useEffect(() => {
+    console.log('[CasperProvider] Loading intro state');
     AsyncStorage.getItem('hasSeenIntro')
       .then((value) => {
+        console.log('[CasperProvider] Intro state loaded:', value);
         if (value === 'true') {
           setHasSeenIntroState(true);
         }
@@ -26,6 +28,7 @@ export const [CasperProvider, useCasper] = createContextHook<CasperContextType>(
   }, []);
 
   const setHasSeenIntro = useCallback((value: boolean) => {
+    console.log('[CasperProvider] Setting intro state:', value);
     setHasSeenIntroState(value);
     AsyncStorage.setItem('hasSeenIntro', value.toString())
       .catch((error) => {

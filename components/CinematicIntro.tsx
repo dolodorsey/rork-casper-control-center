@@ -21,10 +21,12 @@ export function CinematicIntro({ onComplete }: CinematicIntroProps) {
   const metricsFadeAnim = useRef(new Animated.Value(0)).current;
 
   const handleComplete = useCallback(() => {
+    console.log('[CinematicIntro] Animation complete');
     onComplete();
   }, [onComplete]);
 
   useEffect(() => {
+    console.log('[CinematicIntro] Starting animation sequence');
     const sequence = Animated.sequence([
       // Phase 1: Logo appears (0-3s)
       Animated.parallel([

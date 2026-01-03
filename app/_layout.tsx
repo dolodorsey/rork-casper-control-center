@@ -25,6 +25,7 @@ function RootLayoutNav() {
 }
 
 function ErrorFallback({ error }: { error: Error }) {
+  console.error('[ErrorBoundary] Caught error:', error);
   return (
     <View style={styles.errorContainer}>
       <Text style={styles.errorTitle}>App Error</Text>
@@ -36,6 +37,7 @@ function ErrorFallback({ error }: { error: Error }) {
 
 export default function RootLayout() {
   useEffect(() => {
+    console.log('[RootLayout] Mounting');
     SplashScreen.hideAsync();
   }, []);
 
