@@ -117,7 +117,7 @@ export default function ScheduleTab({
       {shifts.length === 0 ? (
         <View style={styles.emptyCard}>
           <Text style={styles.emptyTitle}>No shifts scheduled.</Text>
-          <Text style={styles.muted}>Once shifts are created, they’ll appear here by your role and location access.</Text>
+          <Text style={styles.muted}>Once shifts are created, they'll appear here by your role and location access.</Text>
         </View>
       ) : (
         shifts.map((s) => (

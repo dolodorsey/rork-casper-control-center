@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState, useCallback } from "react";
+import { useEffect, useMemo, useState, useCallback } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import createContextHook from "@nkzw/create-context-hook";
 import { supabase } from "@/lib/supabase";
@@ -37,6 +37,10 @@ export const [AuthProvider, useAuth] = createContextHook<AuthContextType>(() => 
   const [userId, setUserId] = useState<string | null>(null);
   const [profile, setProfile] = useState<Profile | null>(null);
   const [isBooting, setIsBooting] = useState(true);
+  const [allowedLocations, setAllowedLocations] = useState<LocationSummary[]>([]);
+  const [activeLocationId, _setActiveLocationId] = useState<string | null>(null);
+  const [allowedBrands, setAllowedBrands] = useState<BrandSummary[]>([]);
+  const [activeBrandId, _setActiveBrandId] = useState<string | null>(null);
 
   const fetchProfile = async (uid: string) => {
     const { data, error } = await supabase
@@ -46,14 +50,13 @@ export const [AuthProvider, useAuth] = createContextHook<AuthContextType>(() => 
       .single();
 
     if (error) {
-      // Often means profile row wasn't created yet.
       console.warn("[Supabase] profile fetch error:", error.message);
       return null;
     }
     return data as Profile;
   };
 
-  const refreshProfile = async () => {
+  const refreshProfile = useCallback(async () => {
     const { data } = await supabase.auth.getSession();
     const uid = data.session?.user.id ?? null;
     setUserId(uid);
@@ -65,7 +68,7 @@ export const [AuthProvider, useAuth] = createContextHook<AuthContextType>(() => 
 
     const p = await fetchProfile(uid);
     setProfile(p);
-  };
+  }, []);
 
   useEffect(() => {
     let mounted = true;
@@ -113,8 +116,7 @@ export const [AuthProvider, useAuth] = createContextHook<AuthContextType>(() => 
     try {
       if (locationId) await AsyncStorage.setItem('active_location_id', locationId);
       else await AsyncStorage.removeItem('active_location_id');
-    } catch (e) {
-      // ignore
+    } catch {
     }
   }, []);
 
@@ -123,10 +125,10 @@ export const [AuthProvider, useAuth] = createContextHook<AuthContextType>(() => 
     try {
       if (brandId) await AsyncStorage.setItem('active_brand_id', brandId);
       else await AsyncStorage.removeItem('active_brand_id');
-    } catch (e) {
-      // ignore
+    } catch {
     }
   }, []);
+  
   useEffect(() => {
     let cancelled = false;
     const loadAccess = async () => {
@@ -143,7 +145,6 @@ export const [AuthProvider, useAuth] = createContextHook<AuthContextType>(() => 
         const storedLoc = await AsyncStorage.getItem('active_location_id');
         const storedBrand = await AsyncStorage.getItem('active_brand_id');
 
-        // Locations
         let locs: LocationSummary[] = [];
         if (profile.role === 'admin') {
           const { data, error } = await supabase.from('cg_locations').select('id,name,address').order('name');
@@ -160,7 +161,6 @@ export const [AuthProvider, useAuth] = createContextHook<AuthContextType>(() => 
             .filter(Boolean) as LocationSummary[];
         }
 
-        // Brands
         let brs: BrandSummary[] = [];
         if (profile.role === 'admin') {
           const { data, error } = await supabase.from('cg_brands').select('id,name').order('name');
@@ -199,13 +199,11 @@ export const [AuthProvider, useAuth] = createContextHook<AuthContextType>(() => 
         _setActiveLocationId(resolvedLoc);
         _setActiveBrandId(resolvedBrand);
 
-        // Persist resolved values if missing/invalid
         if (resolvedLoc) await AsyncStorage.setItem('active_location_id', resolvedLoc);
         else await AsyncStorage.removeItem('active_location_id');
         if (resolvedBrand) await AsyncStorage.setItem('active_brand_id', resolvedBrand);
         else await AsyncStorage.removeItem('active_brand_id');
-      } catch (e) {
-        // If access tables aren't populated yet, fail gracefully (use profile fields as fallback)
+      } catch {
         if (cancelled) return;
         setAllowedLocations([]);
         setAllowedBrands([]);
@@ -215,13 +213,14 @@ export const [AuthProvider, useAuth] = createContextHook<AuthContextType>(() => 
     };
     loadAccess();
     return () => { cancelled = true; };
-  }, [userId, profile?.role, profile?.location_id, profile?.brand_id]);
-  const signOut = async () => {
+  }, [userId, profile]);
+  
+  const signOut = useCallback(async () => {
     await supabase.auth.signOut();
-  };
+  }, []);
 
   return useMemo(
     () => ({ userId, profile, isBooting, refreshProfile, signOut, allowedLocations, activeLocationId, setActiveLocationId, allowedBrands, activeBrandId, setActiveBrandId }),
-    [userId, profile, isBooting, allowedLocations, activeLocationId, allowedBrands, activeBrandId]
+    [userId, profile, isBooting, refreshProfile, signOut, allowedLocations, activeLocationId, setActiveLocationId, allowedBrands, activeBrandId, setActiveBrandId]
   );
 });

@@ -30,8 +30,6 @@ export default function DirectoryTab({
   const q = useQuery({
     queryKey: ['ops', 'directory', activeLocationId, locationIds],
     queryFn: async () => {
-      // Directory is driven by user_location_access + profiles + locations.
-      // Admins will see everything; non-admins see only their allowed locations via RLS.
       let query = supabase
         .from('v_directory')
         .select('*')
@@ -58,7 +56,7 @@ export default function DirectoryTab({
       {rows.length === 0 ? (
         <View style={styles.emptyCard}>
           <Text style={styles.emptyTitle}>No directory entries yet.</Text>
-          <Text style={styles.muted}>Once users exist in Supabase Auth + profiles and have location access, they’ll appear here.</Text>
+          <Text style={styles.muted}>Once users exist in Supabase Auth + profiles and have location access, they'll appear here.</Text>
         </View>
       ) : (
         rows.map((r) => (
