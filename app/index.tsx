@@ -21,15 +21,15 @@ import {
   MapPin,
   AlertCircle
 } from "lucide-react-native";
-import { COLORS } from "@/constants/colors";
-import { BRANDS } from "@/constants/brands";
-import { METRICS } from "@/constants/metrics";
-import { CinematicIntro } from "@/components/CinematicIntro";
-import { PortalButton } from "@/components/PortalButton";
-import { MetricsRail } from "@/components/MetricsRail";
-import { BrandCard } from "@/components/BrandCard";
-import { GlobalMap } from "@/components/GlobalMap";
-import { useCasper } from "@/providers/CasperProvider";
+import { COLORS } from "../constants/colors";
+import { BRANDS } from "../constants/brands";
+import { METRICS } from "../constants/metrics";
+import { CinematicIntro } from "../components/CinematicIntro";
+import { PortalButton } from "../components/PortalButton";
+import { MetricsRail } from "../components/MetricsRail";
+import { BrandCard } from "../components/BrandCard";
+import { GlobalMap } from "../components/GlobalMap";
+import { useCasper } from "../providers/CasperProvider";
 
 const { width, height } = Dimensions.get("window");
 

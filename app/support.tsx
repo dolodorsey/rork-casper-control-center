@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, ScrollView, StyleSheet, TouchableOpacity, Linking } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import COLORS from '../constants/colors';
+import { COLORS } from '../constants/colors';
 
 export default function SupportScreen() {
   const supportOptions = [
@@ -41,7 +41,7 @@ export default function SupportScreen() {
     <ScrollView style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.headerTitle}>Support & Help</Text>
-        <Text style={styles.headerSubtitle}>We're here to help 24/7</Text>
+        <Text style={styles.headerSubtitle}>We&apos;re here to help 24/7</Text>
       </View>
 
       <View style={styles.section}>
@@ -70,14 +70,14 @@ export default function SupportScreen() {
         <View style={styles.faqItem}>
           <Text style={styles.faqQuestion}>How do I add a new property?</Text>
           <Text style={styles.faqAnswer}>
-            Go to the Dashboard and tap the "Add Property" button. Follow the guided setup process.
+            Go to the Dashboard and tap the &quot;Add Property&quot; button. Follow the guided setup process.
           </Text>
         </View>
 
         <View style={styles.faqItem}>
           <Text style={styles.faqQuestion}>How do I reset my password?</Text>
           <Text style={styles.faqAnswer}>
-            Go to Settings > Account > Security and tap "Change Password".
+            Go to Settings {'->'} Account {'->'} Security and tap &quot;Change Password&quot;.
           </Text>
         </View>
 

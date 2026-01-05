@@ -58,7 +58,19 @@ export const [AdminProvider, useAdmin] = createContextHook<AdminContextType>(() 
               id: userData.user.id,
               email: userData.user.email || '',
               name: userData.user.user_metadata?.name || 'Admin User',
-              role: 'admin',
+              roles: [
+                {
+                  id: 'super_admin',
+                  name: 'super_admin' as const,
+                  permissions: ['*'],
+                },
+              ],
+              assignments: {
+                brandIds: [],
+                locationIds: [],
+              },
+              status: 'active' as const,
+              lastLogin: new Date().toISOString(),
             },
           }));
         }

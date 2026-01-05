@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, ScrollView, StyleSheet, TouchableOpacity, FlatList } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import COLORS from '../../constants/colors';
+import { COLORS } from '../../constants/colors';
 
 // Pinky Promise ATL: Philanthropic Event Tracker
 // Manages community events, fundraisers, and impact metrics
@@ -113,7 +113,7 @@ export default function PinkyPromiseScreen() {
       <View style={styles.missionContainer}>
         <View style={styles.goldBorder}>
           <Text style={styles.missionText}>
-            "A promise kept is a life changed. Every event, every dollar, every volunteer hour creates ripples of hope in our community."
+            &quot;A promise kept is a life changed. Every event, every dollar, every volunteer hour creates ripples of hope in our community.&quot;
           </Text>
           <Text style={styles.missionAuthor}>- Pinky Promise ATL Mission</Text>
         </View>

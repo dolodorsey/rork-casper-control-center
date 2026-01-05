@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import COLORS from '../../constants/colors';
+import { COLORS } from '../../constants/colors';
 
 // Sole Exchange: AF1 Drive Dashboard
 // Tracks 50/50 split: Domestic vs. Africa
@@ -28,7 +28,7 @@ export default function SoleExchangeScreen() {
       <View style={styles.quoteContainer}>
         <View style={styles.goldBorder}>
           <Text style={styles.quoteText}>
-            "Every pair tells a story. Half stay home, half change lives across the ocean."
+            &quot;Every pair tells a story. Half stay home, half change lives across the ocean.&quot;
           </Text>
           <Text style={styles.quoteAuthor}>- The Sole Exchange Mission</Text>
         </View>

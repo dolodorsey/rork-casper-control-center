@@ -3,64 +3,10 @@ import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import React, { useEffect } from "react";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-import { CasperProvider } from "@/providers/CasperProvider";
-import { AdminProvider } from "@/providers/AdminProvider";
+import { CasperProvider } from "../providers/CasperProvider";
+import { AdminProvider } from "../providers/AdminProvider";
 import { ErrorBoundary } from "react-error-boundary";
 import { View, Text, StyleSheet } from "react-native";
-
-// RBAC (Role-Based Access Control) Implementation
-// Three access levels: Admin, Operator, Guest
-
-type UserRole = 'admin' | 'operator' | 'guest';
-
-interface User {
-  id: string;
-  email: string;
-  role: UserRole;
-}
-
-const RBAC_PERMISSIONS = {
-  admin: {
-    canAccessAdmin: true,
-    canAccessEmployee: true,
-    canAccessPartner: true,
-    canAccessBrands: true,
-    canModifySettings: true,
-    canViewAnalytics: true,
-    canManageUsers: true,
-  },
-  operator: {
-    canAccessAdmin: false,
-    canAccessEmployee: true,
-    canAccessPartner: true,
-    canAccessBrands: true,
-    canModifySettings: false,
-    canViewAnalytics: true,
-    canManageUsers: false,
-  },
-  guest: {
-    canAccessAdmin: false,
-    canAccessEmployee: false,
-    canAccessPartner: false,
-    canAccessBrands: true, // Guests can view brand dashboards only
-    canModifySettings: false,
-    canViewAnalytics: false,
-    canManageUsers: false,
-  },
-};
-
-function getUserRole(): UserRole {
-  // TODO: Replace with actual Supabase role check
-  // For now, defaulting to 'admin' for development
-  return 'admin';
-}
-
-function hasPermission(permission: keyof typeof RBAC_PERMISSIONS.admin): boolean {
-  const role = getUserRole();
-  return RBAC_PERMISSIONS[role][permission];
-}
-
-
 
 SplashScreen.preventAutoHideAsync();
 
